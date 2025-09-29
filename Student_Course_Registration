@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+class Student {
+    int id;
+    String name;
+    String course;
+
+    Student(int id, String name, String course) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+    }
+
+    void display() {
+        System.out.println("ID: " + id + " | Name: " + name + " | Course: " + course);
+    }
+}
+
+public class Main {   // ✅ changed from StudentCourseSystem to Main
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student[] students = new Student[50];
+        int count = 0;
+        int choice = 0;
+
+        do {
+            System.out.println("\n--- Course Registration ---");
+            System.out.println("1. Register Student");
+            System.out.println("2. Display Students");
+            System.out.println("3. Exit");
+            System.out.print("Choose: ");
+
+            choice = sc.nextInt();
+            sc.nextLine(); // clear buffer
+
+            switch (choice) {
+                case 1:
+                    if (count >= students.length) {
+                        System.out.println("Registration full! No more students can be added.");
+                        break;
+                    }
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // clear buffer
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Course: ");
+                    String course = sc.nextLine();
+
+                    students[count++] = new Student(id, name, course);
+                    System.out.println("Student Registered!");
+                    break;
+
+                case 2:
+                    if (count == 0) {
+                        System.out.println("No students registered yet.");
+                    } else {
+                        System.out.println("Registered Students:");
+                        for (int i = 0; i < count; i++) {
+                            students[i].display();
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Try again.");
+            }
+        } while (choice != 3);
+
+        sc.close();
+    }
+}
+
+
+
+
+
